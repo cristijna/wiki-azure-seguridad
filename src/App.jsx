@@ -53,7 +53,7 @@ function App() {
       
       <div className="wiki-layout">
         {/* Menú lateral */}
-        <nav className="sidebar">
+        <nav className="sidebar glass-panel">
           <h3>Temas de Estudio</h3>
           <ul>
             {articulos.map((art) => (
@@ -69,53 +69,52 @@ function App() {
           </ul>
         </nav>
 
-        {/* Contenido principal que cambia dinámicamente */}
-        <main className="contenido-principal">
-                  {articuloActivo ? (
-                    <div className="articulo">
-                      <h2>{articuloActivo.titulo}</h2>
-                      {articuloActivo.contenido.split('\n').map((parrafo, index) => (
-                        <p key={index}>{parrafo}</p>
-                      ))}
-                      
-                      {/* Sección de mapeo de gobernanza */}
-                      <div className="gobernanza-container">
-                        <h4>Marco de Cumplimiento y Gobernanza:</h4>
-                        <div className="tags">
-                          {articuloActivo.normativas.map((norma, index) => (
-                            <span key={index} className="tag">{norma}</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bienvenida azure-resumen">
-                      <h2>¿Qué es Microsoft Azure? </h2>
-                      <p>
-                        <strong>Microsoft Azure</strong> es la plataforma de computación en la nube de nivel empresarial de Microsoft. Ofrece infraestructura, plataforma y software como servicio (IaaS, PaaS, SaaS) permitiendo a las organizaciones compilar, ejecutar y administrar aplicaciones a escala global.
-                      </p>
-                      
-                      <div className="pilares-azure">
-                        <div className="pilar">
-                          <h3>🛡️ Seguridad Zero Trust</h3>
-                          <p>Asume la vulnerabilidad por defecto. Utiliza autenticación estricta (Entra ID), cifrado de extremo a extremo y microsegmentación para proteger los activos críticos.</p>
-                        </div>
-                        <div className="pilar">
-                          <h3>⚖️ Gobernanza y Compliance</h3>
-                          <p>Líder en cumplimiento normativo global. Facilita la alineación con estándares como ISO 27001, NIST y COBIT mediante políticas automatizadas (Azure Policy).</p>
-                        </div>
-                        <div className="pilar">
-                          <h3>🚀 Resiliencia (CIA)</h3>
-                          <p>Garantiza la Disponibilidad (parte de la tríada CIA) de los servicios mediante zonas de redundancia globales y acuerdos de nivel de servicio (SLA) del 99.9%.</p>
-                        </div>
-                      </div>
-                      
-                      <p className="instruccion-final">
-                        👈 <strong>Selecciona un tema en el menú lateral</strong> para explorar los controles técnicos.
-                      </p>
-                    </div>
-                  )}
-          </main>
+        <main className="contenido-principal glass-panel">
+          {articuloActivo ? (
+            // La propiedad 'key' fuerza a React a recrear el div y reiniciar la animación
+            <div className="articulo fade-in" key={articuloActivo.id}>
+              <h2>{articuloActivo.titulo}</h2>
+              {articuloActivo.contenido.split('\n').map((parrafo, index) => (
+                <p key={index}>{parrafo}</p>
+              ))}
+              
+              <div className="gobernanza-container">
+                <h4>Marco de Cumplimiento y Gobernanza:</h4>
+                <div className="tags">
+                  {articuloActivo.normativas.map((norma, index) => (
+                    <span key={index} className="tag">{norma}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="bienvenida azure-resumen fade-in" key="bienvenida">
+              <h2>¿Qué es Microsoft Azure? ☁️</h2>
+              <p>
+                <strong>Microsoft Azure</strong> es la plataforma de computación en la nube de nivel empresarial de Microsoft. Ofrece infraestructura, plataforma y software como servicio (IaaS, PaaS, SaaS) permitiendo a las organizaciones compilar, ejecutar y administrar aplicaciones a escala global.
+              </p>
+              
+              <div className="pilares-azure">
+                <div className="pilar glass-panel">
+                  <h3>🛡️ Seguridad Zero Trust</h3>
+                  <p>Asume la vulnerabilidad por defecto. Utiliza autenticación estricta (Entra ID), cifrado de extremo a extremo y microsegmentación.</p>
+                </div>
+                <div className="pilar glass-panel">
+                  <h3>⚖️ Gobernanza</h3>
+                  <p>Líder en cumplimiento normativo global. Facilita la alineación con estándares como ISO 27001, NIST y COBIT (Azure Policy).</p>
+                </div>
+                <div className="pilar glass-panel">
+                  <h3>🚀 Resiliencia</h3>
+                  <p>Garantiza la Disponibilidad de los servicios mediante zonas de redundancia globales y acuerdos de nivel de servicio (SLA) del 99.9%.</p>
+                </div>
+              </div>
+              
+              <p className="instruccion-final">
+                👈 <strong>Selecciona un tema en el menú lateral</strong> para explorar los controles técnicos.
+              </p>
+            </div>
+          )}
+        </main>
       </div>
     </div>
   );
